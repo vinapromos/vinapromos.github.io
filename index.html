@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vina Promos - Ofertas de Games e Consoles</title>
+<link rel="preload" href="assets/hero-bg.webp" as="image" type="image/webp">
+<link rel="preload" href="assets/hero-product.webp" as="image" type="image/webp">
+<link rel="preload" href="assets/logo.webp" as="image" type="image/webp">
+<link rel="icon" href="Ativo%201fv.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="Ativo%201fv.svg">
+
+<style>
+  :root{
+    --dark:#1c1c1c;
+    --navbar:#050505;
+    --white:#f5f5fb;
+    --green:#00bd2d;
+    --green-dark:#00a327;
+    --blue:#0088cc;
+    --blue-dark:#0077b3;
+    --gradient-cta: linear-gradient(180deg,#a90a65 0%,#f3752e 100%);
+    --accent-pink:#c140b5;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html,body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:var(--dark);
+    color:var(--white);
+  }
+
+  header{
+    background:var(--navbar);
+    width:100%;
+  }
+
+  .brand-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    padding:16px 20px 12px;
+  }
+
+  .brand-row img{
+    height:72px;
+    width:72px;
+    border-radius:16px;
+    filter:drop-shadow(0 4px 14px rgba(0,0,0,0.5));
+  }
+
+  .brand-row .wordmark{
+    font-weight:900;
+    font-size:1.9rem;
+    letter-spacing:0.5px;
+    background:linear-gradient(90deg,#4d6bff 0%,#c140b5 55%,#ff5fa2 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .nav-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:32px;
+    padding:14px 20px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    flex-wrap:wrap;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .nav-links a{
+    color:#e8e8ee;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+    opacity:0.9;
+  }
+
+  .nav-links a:hover{opacity:1;color:var(--accent-pink);}
+
+  .nav-links a.active{
+    color:var(--accent-pink);
+    border-bottom:2px solid var(--accent-pink);
+    padding-bottom:4px;
+  }
+
+  .search-form{
+    display:flex;
+    align-items:center;
+  }
+
+  .search-form input{
+    background:#1f1f1f;
+    border:1px solid rgba(255,255,255,0.15);
+    color:#fff;
+    padding:9px 14px;
+    border-radius:8px 0 0 8px;
+    font-size:0.9rem;
+    outline:none;
+    width:180px;
+  }
+
+  .search-form button{
+    background:var(--accent-pink);
+    border:none;
+    color:#fff;
+    padding:9px 14px;
+    border-radius:0 8px 8px 0;
+    cursor:pointer;
+    font-size:1rem;
+  }
+
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(10,8,20,0.55) 0%, rgba(10,8,20,0.35) 40%, rgba(10,8,20,0.65) 100%),
+      url("assets/hero-bg.webp");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:auto;
+    padding-top:64px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .hero-inner{
+    width:100%;
+    max-width:1100px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+
+  .hero-text{
+    flex:1 1 380px;
+    min-width:280px;
+  }
+
+  .hero-text h1{
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    line-height:1.05;
+    font-weight:800;
+    letter-spacing:-0.5px;
+  }
+
+  .hero-text h1 .accent{
+    display:block;
+    font-size:clamp(2.6rem, 7vw, 4.4rem);
+    color:#f0c9e8;
+    text-shadow:0 0 18px rgba(240,150,220,0.35);
+    transition:opacity .45s ease, transform .45s ease;
+  }
+
+  .hero-text h1 .accent.fade{
+    opacity:0;
+    transform:translateY(6px);
+  }
+
+  .hero-img{
+    flex:1 1 380px;
+    min-width:280px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .hero-img img{
+    max-width:100%;
+    height:auto;
+  }
+
+  .links-section{
+    margin-top:36px;
+    width:100%;
+    max-width:420px;
+  }
+
+  .group-label{
+    font-weight:700;
+    font-size:0.95rem;
+    margin-bottom:12px;
+    opacity:0.9;
+  }
+
+  .btn-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+
+  a.btn{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:14px 22px;
+    border-radius:2px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .12s ease, box-shadow .12s ease;
+    flex:1 1 auto;
+    justify-content:center;
+    white-space:nowrap;
+    box-shadow:6px 6px 0px #130e22;
+  }
+
+  a.btn:hover{transform:translate(2px,2px);box-shadow:4px 4px 0px #130e22;}
+  a.btn:active{transform:translate(6px,6px);box-shadow:0px 0px 0px #130e22;}
+
+  .btn-icon{
+    width:19px;
+    height:19px;
+    flex-shrink:0;
+  }
+
+  .btn-whatsapp{background:var(--green);}
+  .btn-whatsapp:hover{background:var(--green-dark);}
+  .btn-telegram{background:var(--blue);}
+  .btn-telegram:hover{background:var(--blue-dark);}
+  .btn-exclusive{background:var(--gradient-cta);}
+
+  .btn-channel{
+    background: linear-gradient(90deg, #c62f7c 0%, #e34b66 40%, #f57c2d 100%);
+    border: 2px solid rgba(255,255,255,.15);
+    color: #fff;
+    border-radius: 50px;
+    box-shadow:
+      0 0 0 2px rgba(0,0,0,.3) inset,
+      0 5px 0 #2a1520,
+      0 8px 20px rgba(245,124,45,.35);
+    transition: .25s ease;
+  }
+  .btn-channel:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow:
+      0 0 0 2px rgba(0,0,0,.3) inset,
+      0 7px 0 #2a1520,
+      0 12px 28px rgba(245,124,45,.45);
+  }
+  .btn-channel:active{
+    transform: translateY(2px);
+    box-shadow:
+      0 0 0 2px rgba(0,0,0,.3) inset,
+      0 2px 0 #2a1520,
+      0 4px 12px rgba(0,0,0,.3);
+  }
+
+  /* Botão flutuante WhatsApp */
+  .float-whatsapp{
+    position:fixed !important;
+    bottom:24px !important;
+    right:24px !important;
+    left:auto !important;
+    top:auto !important;
+    z-index:99999 !important;
+    display:inline-flex !important;
+    align-items:center;
+    gap:10px;
+    background:#00bd2d !important;
+    color:#fff !important;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:14px 20px;
+    border-radius:50px;
+    text-decoration:none !important;
+    box-shadow:
+      0 4px 20px rgba(0,189,45,.45),
+      0 2px 8px rgba(0,0,0,.25);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px) scale(.9);
+    transition:opacity .3s ease, transform .3s ease, visibility .3s, background .2s, box-shadow .2s;
+    white-space:nowrap;
+    pointer-events:none;
+  }
+  .float-whatsapp.visible{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:translateY(0) scale(1) !important;
+    pointer-events:auto !important;
+  }
+  .float-whatsapp:hover{
+    background:var(--green-dark);
+    box-shadow:
+      0 6px 28px rgba(0,189,45,.55),
+      0 4px 12px rgba(0,0,0,.3);
+    transform:translateY(-3px) scale(1.03);
+  }
+  .float-whatsapp:active{
+    transform:scale(.97);
+  }
+  .float-whatsapp svg{
+    width:22px;
+    height:22px;
+    flex-shrink:0;
+  }
+  .float-whatsapp .pulse{
+    position:absolute;
+    inset:0;
+    border-radius:50px;
+    background:rgba(0,189,45,.4);
+    animation:float-pulse 2s ease-out infinite;
+    z-index:-1;
+  }
+  @keyframes float-pulse{
+    0%{transform:scale(1);opacity:.6;}
+    100%{transform:scale(1.35);opacity:0;}
+  }
+  @media (max-width:768px){
+    .float-whatsapp{
+      bottom:16px;
+      right:16px;
+      padding:12px 16px;
+      font-size:0.88rem;
+    }
+  }
+
+  .divider{
+    border:none;
+    border-top:1px solid rgba(255,255,255,0.25);
+    margin:20px 0;
+  }
+
+  .social-title{
+    text-align:center;
+    font-weight:700;
+    margin-top:12px;
+    margin-bottom:14px;
+  }
+
+  .social-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+  }
+
+  .social-row a{
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    transition:background .15s ease;
+  }
+
+  .social-row a:hover{background:rgba(255,255,255,0.25);}
+
+  .showcase-section{
+    content-visibility:auto;
+    contain-intrinsic-size:800px;
+    background:linear-gradient(180deg,#0d0b16 0%, #1a1226 60%, #0d0b16 100%);
+    padding:48px 0 56px;
+    overflow:hidden;
+  }
+
+  .showcase-title{
+    text-align:center;
+    font-size:clamp(1.3rem, 3.2vw, 1.9rem);
+    font-weight:800;
+    color:#f2f0fa;
+    margin-bottom:36px;
+    letter-spacing:0.3px;
+  }
+
+  .showcase-title .highlight{
+    background:linear-gradient(90deg,#c140b5,#ff5fa2);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .marquee-track{
+    display:flex;
+    width:max-content;
+    gap:56px;
+    animation:marquee-scroll 9s linear infinite;
+  }
+
+  @keyframes marquee-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-16.6667%);}
+  }
+
+  .marquee-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    min-width:140px;
+  }
+
+  .marquee-item .icon-circle{
+    width:84px;
+    height:84px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #3a2a4d, #17121f);
+    border:1px solid rgba(255,255,255,0.1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
+    overflow:hidden;
+  }
+
+  .marquee-item .icon-circle svg{
+    width:38px;
+    height:38px;
+    color:#f2f0fa;
+  }
+
+  .marquee-item .icon-circle img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .marquee-item span.label{
+    font-weight:700;
+    font-size:0.9rem;
+    color:#d8d5e6;
+    letter-spacing:0.5px;
+    white-space:nowrap;
+  }
+
+  .offers-section{
+    content-visibility:auto;
+    contain-intrinsic-size:500px;
+    background:var(--dark);
+    text-align:center;
+    padding:64px 24px;
+  }
+
+  .offers-section h2{
+    font-size:clamp(1.6rem, 4vw, 2.4rem);
+    color:#d8d8e2;
+    font-weight:800;
+    margin-bottom:40px;
+  }
+
+  .footer-social{
+    content-visibility:auto;
+    contain-intrinsic-size:200px;
+    background:
+      linear-gradient(180deg, rgba(10,8,20,0.55) 0%, rgba(70,30,70,0.65) 100%),
+      url("assets/hero-bg.webp");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    text-align:center;
+    padding:44px 24px;
+  }
+
+  .footer-social h2{
+    font-size:clamp(1.3rem, 3.2vw, 1.8rem);
+    font-weight:800;
+    color:#fff;
+    margin-bottom:22px;
+  }
+
+  .footer-social .social-row{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+  }
+
+  .footer-social .social-row a{
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.16);
+    backdrop-filter:blur(2px);
+    transition:background .15s ease, transform .15s ease;
+  }
+
+  .footer-social .social-row a:hover{
+    background:rgba(255,255,255,0.28);
+    transform:translateY(-2px);
+  }
+
+  .footer-social .social-row svg{
+    width:24px;
+    height:24px;
+  }
+
+  .videos-row{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:28px;
+    flex-wrap:wrap;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .video-slot{
+    width:100%;
+    max-width:300px;
+    aspect-ratio:9/16;
+    background:#111114;
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:14px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  .video-slot iframe,
+  .video-slot video{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+
+  .video-slot .placeholder{
+    color:rgba(255,255,255,0.35);
+    font-size:0.85rem;
+    font-weight:600;
+    padding:0 16px;
+  }
+
+  @media (max-width:768px){
+    .brand-row img{height:56px;width:56px;}
+    .brand-row .wordmark{font-size:1.4rem;}
+    .nav-row{flex-direction:column;gap:14px;}
+    .nav-links{gap:16px;justify-content:center;}
+    .search-form input{width:140px;}
+    .hero{padding:32px 16px 40px;}
+    .links-section{max-width:100%;}
+    .btn-row{flex-direction:column;}
+  }
+</style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '853859867733576');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=853859867733576&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<header>
+  <div class="brand-row">
+    <img src="assets/logo.webp" width="72" height="72" decoding="async" alt="Vina Promos">
+    <span class="wordmark">VINA PROMOS</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>AS MELHORES OFERTAS:<span class="accent" id="rotating-word">PlayStation 5</span></h1>
+
+      <div class="links-section">
+        <div class="group-label">Grupos</div>
+                <div class="btn-row">
+          <a href="https://chat.whatsapp.com/KRXeKbsqlUrI4ua9MkRvAN"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn btn-whatsapp cta-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.53-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23M8.53 7.4c-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15 0 1.27.92 2.5 1.05 2.67.13.17 1.8 2.86 4.45 3.9 2.2.87 2.65.7 3.13.65.48-.04 1.53-.62 1.75-1.22.22-.6.22-1.11.15-1.22-.06-.11-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.4-.13-.58.13-.17.26-.66.84-.81 1.01-.15.17-.3.2-.56.07-.26-.13-1.09-.4-2.08-1.28-.77-.68-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.4-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45C9.99 8.9 9.46 7.6 9.24 7.09c-.18-.44-.36-.45-.5-.46l-.21-.01z"/>
+  </svg>
+            Grupo do WhatsApp
+          </a>
+          <a href="https://whatsapp.com/channel/0029Vb9E6DrGehEGyVpJPs2B"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn btn-channel cta-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.53-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23M8.53 7.4c-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15 0 1.27.92 2.5 1.05 2.67.13.17 1.8 2.86 4.45 3.9 2.2.87 2.65.7 3.13.65.48-.04 1.53-.62 1.75-1.22.22-.6.22-1.11.15-1.22-.06-.11-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.4-.13-.58.13-.17.26-.66.84-.81 1.01-.15.17-.3.2-.56.07-.26-.13-1.09-.4-2.08-1.28-.77-.68-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.4-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45C9.99 8.9 9.46 7.6 9.24 7.09c-.18-.44-.36-.45-.5-.46l-.21-.01z"/>
+  </svg>
+            Canal do WhatsApp
+          </a>
+         </div>
+
+      </div>
+    </div>
+
+    <div class="hero-img">
+      <img src="assets/hero-product.webp" width="600" height="600" fetchpriority="high" decoding="async" alt="Consoles, jogos e cartões-presente">
+    </div>
+  </div>
+</section>
+
+<section class="showcase-section">
+  <div class="showcase-title">PROMOÇÕES QUE <span class="highlight">VOCÊ ENCONTRA AQUI</span></div>
+  <div class="marquee-track">
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-1.webp" alt="CONSOLES"></div>
+      <span class="label">CONSOLES</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-2.webp" alt="PC GAMER"></div>
+      <span class="label">PC GAMER</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-3.webp" alt="GIFT CARDS"></div>
+      <span class="label">GIFT CARDS</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-4.webp" alt="ACESSÓRIOS"></div>
+      <span class="label">ACESSÓRIOS</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-5.webp" alt="E MUITO MAIS"></div>
+      <span class="label">E MUITO MAIS</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-1.webp" alt="CONSOLES"></div>
+      <span class="label">CONSOLES</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-2.webp" alt="PC GAMER"></div>
+      <span class="label">PC GAMER</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-3.webp" alt="GIFT CARDS"></div>
+      <span class="label">GIFT CARDS</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-4.webp" alt="ACESSÓRIOS"></div>
+      <span class="label">ACESSÓRIOS</span>
+    </div>
+    
+<div class="marquee-item">
+      <div class="icon-circle"><img loading="lazy" width="64" height="64" decoding="async" src="assets/icon-5.webp" alt="E MUITO MAIS"></div>
+      <span class="label">E MUITO MAIS</span>
+    </div>
+    
+  </div>
+</section>
+
+<section class="offers-section">
+  <h2>ACOMPANHE O VINA NO YOUTUBE</h2>
+  <div class="videos-row">
+    <div class="video-slot">
+      <iframe src="https://www.youtube.com/embed/mZ0sobabdQQ" loading="lazy" title="Vina Promos - YouTube Shorts 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-slot">
+      <iframe src="https://www.youtube.com/embed/UOm8kKFWwBY" loading="lazy" title="Vina Promos - YouTube Shorts 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-slot">
+      <iframe src="https://www.youtube.com/embed/lhF4Up3cH-M" loading="lazy" title="Vina Promos - YouTube Shorts 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="footer-social">
+  <h2>Siga nossas redes sociais</h2>
+  <div class="social-row">
+    <a href="https://www.youtube.com/@Vina1fps" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.4 3.6-6.4 3.6Z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/vina_promos/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var words = ["PlayStation 5", "Gift Cards", "GTA VI", "Hardware", "Periféricos", "Monitores", "Games", "Consoles"];
+    var el = document.getElementById("rotating-word");
+    var i = 0;
+    if(el){
+      setInterval(function(){
+        el.classList.add("fade");
+        setTimeout(function(){
+          i = (i + 1) % words.length;
+          el.textContent = words[i];
+          el.classList.remove("fade");
+        }, 450);
+      }, 2200);
+    }
+  })();
+</script>
+
+<script>
+  (function(){
+    var btn = document.getElementById("float-whatsapp");
+    var section = document.querySelector(".showcase-section");
+    if(!btn) return;
+
+    function show(){ btn.classList.add("visible"); }
+    function hide(){ btn.classList.remove("visible"); }
+
+    function check(){
+      if(!section){
+        // fallback: mostra após 200px
+        var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if(y > 200) show(); else hide();
+        return;
+      }
+      // mostra quando a seção "Promoções que você encontra aqui" entra na tela
+      // ou quando o usuário já passou dela
+      var rect = section.getBoundingClientRect();
+      var viewportH = window.innerHeight || document.documentElement.clientHeight;
+      // top da seção chegou perto do topo da tela (ou passou)
+      if(rect.top <= viewportH * 0.75){
+        show();
+      } else {
+        hide();
+      }
+    }
+
+    window.addEventListener("scroll", check, {passive:true});
+    window.addEventListener("resize", check, {passive:true});
+    window.addEventListener("touchmove", check, {passive:true});
+    check();
+    setTimeout(check, 200);
+    setTimeout(check, 800);
+  })();
+</script>
+
+<a href="https://chat.whatsapp.com/KRXeKbsqlUrI4ua9MkRvAN"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="float-whatsapp cta-btn"
+   id="float-whatsapp"
+   aria-label="Entrar no Grupo do WhatsApp">
+  <span class="pulse"></span>
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.53-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23M8.53 7.4c-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15 0 1.27.92 2.5 1.05 2.67.13.17 1.8 2.86 4.45 3.9 2.2.87 2.65.7 3.13.65.48-.04 1.53-.62 1.75-1.22.22-.6.22-1.11.15-1.22-.06-.11-.24-.17-.5-.3-.26-.13-1.53-.75-1.77-.84-.24-.09-.4-.13-.58.13-.17.26-.66.84-.81 1.01-.15.17-.3.2-.56.07-.26-.13-1.09-.4-2.08-1.28-.77-.68-1.29-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.4-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45C9.99 8.9 9.46 7.6 9.24 7.09c-.18-.44-.36-.45-.5-.46l-.21-.01z"/>
+  </svg>
+  Grupo do WhatsApp
+</a>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.cta-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Lead');
+          console.log('✅ Lead disparado com sucesso!');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
