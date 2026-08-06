@@ -259,35 +259,37 @@
 
   /* Botão flutuante WhatsApp */
   .float-whatsapp{
-    position:fixed;
-    bottom:24px;
-    right:24px;
-    z-index:9999;
-    display:inline-flex;
+    position:fixed !important;
+    bottom:24px !important;
+    right:24px !important;
+    left:auto !important;
+    top:auto !important;
+    z-index:99999 !important;
+    display:inline-flex !important;
     align-items:center;
     gap:10px;
-    background:var(--green);
-    color:#fff;
+    background:#00bd2d !important;
+    color:#fff !important;
     font-weight:700;
     font-size:0.95rem;
     padding:14px 20px;
     border-radius:50px;
-    text-decoration:none;
+    text-decoration:none !important;
     box-shadow:
       0 4px 20px rgba(0,189,45,.45),
       0 2px 8px rgba(0,0,0,.25);
     opacity:0;
     visibility:hidden;
     transform:translateY(20px) scale(.9);
-    transition:opacity .35s ease, transform .35s ease, visibility .35s, background .2s, box-shadow .2s;
+    transition:opacity .3s ease, transform .3s ease, visibility .3s, background .2s, box-shadow .2s;
     white-space:nowrap;
     pointer-events:none;
   }
   .float-whatsapp.visible{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:translateY(0) scale(1) !important;
+    pointer-events:auto !important;
   }
   .float-whatsapp:hover{
     background:var(--green-dark);
@@ -741,7 +743,7 @@
       <iframe src="https://www.youtube.com/embed/mZ0sobabdQQ" title="Vina Promos - YouTube Shorts 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     <div class="video-slot">
-      <iframe src="https://www.youtube.com/embed/INt8XjHSpdo" title="Vina Promos - YouTube Shorts 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/UOm8kKFWwBY" title="Vina Promos - YouTube Shorts 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     <div class="video-slot">
       <iframe src="https://www.youtube.com/embed/lhF4Up3cH-M" title="Vina Promos - YouTube Shorts 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -782,13 +784,12 @@
 <script>
   (function(){
     var btn = document.getElementById("float-whatsapp");
-    var hero = document.querySelector(".hero");
-    if(!btn || !hero) return;
+    if(!btn) return;
 
     function checkScroll(){
-      // aparece na segunda dobra (após ~60% do hero ou 400px de scroll)
-      var trigger = Math.min(hero.offsetTop + hero.offsetHeight * 0.55, 450);
-      if(window.pageYOffset > trigger || document.documentElement.scrollTop > trigger){
+      var y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      // aparece após 120px de scroll (segunda dobra)
+      if(y > 120){
         btn.classList.add("visible");
       } else {
         btn.classList.remove("visible");
@@ -796,8 +797,12 @@
     }
 
     window.addEventListener("scroll", checkScroll, {passive:true});
+    window.addEventListener("touchmove", checkScroll, {passive:true});
     window.addEventListener("resize", checkScroll, {passive:true});
+    // checa ao carregar e com pequeno delay (imagens/hero)
     checkScroll();
+    setTimeout(checkScroll, 300);
+    setTimeout(checkScroll, 1000);
   })();
 </script>
 
